@@ -167,7 +167,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 120Mi
+        memory: 1Gi
     initContainers:
       - name: wait-for-kafka
         image: busybox:latest
@@ -192,7 +192,7 @@ components:
         value: otlp
     resources:
       limits:
-        memory: 300Mi
+        memory: 3Gi
 
   cartService:
     enabled: true
@@ -215,7 +215,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 160Mi
+        memory: 1Gi
     initContainers:
       - name: wait-for-valkey
         image: busybox:latest
@@ -252,7 +252,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 20Mi
+        memory: 200Mi
     initContainers:
       - name: wait-for-kafka
         image: busybox:latest
@@ -273,7 +273,7 @@ components:
         value: "{{ .Chart.AppVersion }}"
     resources:
       limits:
-        memory: 20Mi
+        memory: 200Mi
 
   emailService:
     enabled: true
@@ -290,7 +290,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4318/v1/traces
     resources:
       limits:
-        memory: 100Mi
+        memory: 1Gi
 
   frauddetectionService:
     enabled: true
@@ -307,7 +307,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4318
     resources:
       limits:
-        memory: 300Mi
+        memory: 3Gi
     initContainers:
       - name: wait-for-kafka
         image: busybox:latest
@@ -352,7 +352,7 @@ components:
         value: http://localhost:8080/otlp-http/v1/traces             # This expects users to use `kubectl port-forward ...`
     resources:
       limits:
-        memory: 250Mi
+        memory: 3Gi
     securityContext:
       runAsUser: 1001  # nextjs
       runAsGroup: 1001
@@ -399,7 +399,7 @@ components:
         value: "4318"
     resources:
       limits:
-        memory: 50Mi
+        memory: 500Mi
     securityContext:
       runAsUser: 101  # envoy
       runAsGroup: 101
@@ -420,7 +420,7 @@ components:
         value: $(OTEL_COLLECTOR_NAME)
     resources:
       limits:
-        memory: 50Mi
+        memory: 500Mi
 
   loadgenerator:
     enabled: true
@@ -472,7 +472,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 120Mi
+        memory: 1Gi
     securityContext:
       runAsUser: 1000  # node
       runAsGroup: 1000
@@ -495,7 +495,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 20Mi
+        memory: 500Mi
 
   quoteService:
     enabled: true
@@ -512,7 +512,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4318
     resources:
       limits:
-        memory: 40Mi
+        memory: 400Mi
     securityContext:
       runAsUser: 33  # www-data
       runAsGroup: 33
@@ -541,7 +541,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 500Mi            # This is high to enable supporting the recommendationCache feature flag use case
+        memory: 5Gi            # This is high to enable supporting the recommendationCache feature flag use case
 
   shippingService:
     enabled: true
@@ -558,7 +558,7 @@ components:
         value: http://$(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 20Mi
+        memory: 200Mi
 
   flagd:
     enabled: true
@@ -577,7 +577,7 @@ components:
         value: $(OTEL_COLLECTOR_NAME):4317
     resources:
       limits:
-        memory: 50Mi
+        memory: 500Mi
     command:
       - "/flagd-build"
       - "start"
@@ -607,7 +607,7 @@ components:
         value: "-Xmx400M -Xms400M"
     resources:
       limits:
-        memory: 600Mi
+        memory: 4Gi
     securityContext:
       runAsUser: 1000  # appuser
       runAsGroup: 1000
@@ -626,7 +626,7 @@ components:
         value: 6379
     resources:
       limits:
-        memory: 20Mi
+        memory: 200Mi
     securityContext:
       runAsUser: 999  # valkey
       runAsGroup: 1000
@@ -643,7 +643,7 @@ opentelemetry-collector:
       enabled: true
   resources:
     limits:
-      memory: 200Mi
+      memory: 2Gi
   service:
     type: ClusterIP
   ports:
@@ -757,7 +757,7 @@ jaeger:
         value: prometheus
     resources:
       limits:
-        memory: 400Mi
+        memory: 2Gi
   storage:
     type: memory
   agent:
@@ -797,7 +797,7 @@ prometheus:
       servicePort: 9090
     resources:
       limits:
-        memory: 300Mi
+        memory: 2Gi
 
   serverFiles:
     prometheus.yml:
@@ -884,7 +884,7 @@ grafana:
     default: '{{ include "otel-demo.name" . }}-grafana-dashboards'
   resources:
     limits:
-      memory: 150Mi
+      memory: 1Gi
 
 opensearch:
   enabled: true
