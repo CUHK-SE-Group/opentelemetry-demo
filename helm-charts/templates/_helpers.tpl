@@ -36,6 +36,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- if .name }}
 app.kubernetes.io/component: {{ .name}}
 app.kubernetes.io/name: {{ include "otel-demo.name" . }}-{{ .name }}
+app: {{ .name}}
 {{- else }}
 app.kubernetes.io/name: {{ include "otel-demo.name" . }}
 {{- end }}
