@@ -451,9 +451,6 @@ components:
         value: "8013"
       - name: OTEL_EXPORTER_OTLP_ENDPOINT
         value: http://$(OTEL_COLLECTOR_NAME):4317
-    resources:
-      limits:
-        memory: 1Gi
 
   paymentService:
     enabled: true
