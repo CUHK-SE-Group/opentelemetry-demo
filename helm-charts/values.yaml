@@ -10,8 +10,12 @@ default:
       value: '{{ include "otel-demo.name" . }}-otelcol'
     - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
       value: cumulative
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
     - name: OTEL_RESOURCE_ATTRIBUTES
-      value: 'service.name=$(OTEL_SERVICE_NAME),service.namespace={{ .Release.Namespace }},service.version={{ .Chart.AppVersion }}'
+      value: 'service.name=$(OTEL_SERVICE_NAME),service.namespace={{ .Release.Namespace }},service.version={{ .Chart.AppVersion }},pod.name=$(POD_NAME)'
   # Allows overriding and additions to .Values.default.env
   envOverrides: []
   #  - name: OTEL_K8S_NODE_NAME
